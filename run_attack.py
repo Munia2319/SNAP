@@ -95,6 +95,12 @@ if __name__ == '__main__':
         help='list of poison percent',
         type=str,
         default= '[0.0,0.005, 0.01,0.015, 0.02, 0.025, 0.03,0.035, 0.04, 0.045, 0.05]'
+        #Uncomment the following For medium size property
+        #default ='[0.00,0.001,0.002,0.003,0.004,0.005,0.006,0.007,0.008,0.009,0.01]'
+        #Uncomment the following For large size property
+        #default ='[0.0,0.005, 0.01,0.015, 0.02, 0.025, 0.03,0.035, 0.04, 0.045, 0.05]'
+        #Uncomment the following For small size property
+        default= '[0.00,0.0001,0.0002,0.0003,0.0004,0.0005,0.0006,0.0007,0.0008,0.0009,0.001]'
         #default='[0.000,0.001 ]'
     )
     
