@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SNAP: Efficient Extraction of Private Properties with Poisoning
 **Authors: Harsh Chaudhari, John Abascal, Alina Oprea, Matthew Jagielski, Florian Tramèr, Jonathan Ullman.**
 
@@ -66,3 +67,6 @@ Link to Download Census: https://archive.ics.uci.edu/ml/datasets/Census-Income+(
 
 
 
+=======
+# SNAP
+>>>>>>> origin/main
