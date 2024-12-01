@@ -48,8 +48,10 @@ parser.add_argument(
     help='list of poison percent',
     type=str,
     default="[0.0, 0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.05]"
-)
+) ```
 
+
+- I also modified the code so that it can plot the accuracy for different poison rates dynamically.
  print("Attack Accuracy:")
     poisoning_rates = []
     accuracies = []
