@@ -2,7 +2,7 @@
 # SNAP: Efficient Extraction of Private Properties with Poisoning
 **Authors: Harsh Chaudhari, John Abascal, Alina Oprea, Matthew Jagielski, Florian Tramèr, Jonathan Ullman.**
 
-Code is implemented in this paper [SNAP: Efficient Extraction of Private Properties with Poisoning](https://arxiv.org/pdf/2208.12348.pdf) paper that will appear at IEEE S&P 2023.
+Code is implemented on this paper [SNAP: Efficient Extraction of Private Properties with Poisoning](https://arxiv.org/pdf/2208.12348.pdf)
 This code is collected from the author's [SNAP repository](https://github.com/johnmath/snap-sp23/tree/main)
 
 ## Running the Model Confidence attack
