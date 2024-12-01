@@ -14,6 +14,7 @@ python run_attacks.py -dat [--dataset] -tp [--targetproperties] -t0 [--t0frac] -
                       -subcat [--subcategories] -q [--nqueries] -nt [--ntrials]
 
 ```
+I also replicated the label-only extension on the property inference attack and the code was taken from this [branch](https://github.com/johnmath/snap-sp23/tree/label-only) of the previous repository. 
 # Enhancements in the Code for Poisoning Attack Accuracy
 
 ### Overview
@@ -23,15 +24,18 @@ This section describes the modifications I made to the code to enhance its funct
 
 ### Step 1: Setting Up the Environment
 - I created a virtual environment and installed all the required packages.
-- During the initial run, I encountered a **TypeError** related to converting `numpy.ndarray` to `torch.Tensor`. The error traceback can be seen below:
+- During the initial run, I also found an error regarding the command line argument. It was because in the repo they added '=' for assigning the argument value. So analysed how the argument was designed to take the value and tried it without '='.
+![Error Screenshot 1](./Errors-solution/error.png)
+   
+- I encountered a **TypeError** related to converting `numpy.ndarray` to `torch.Tensor`. The error traceback can be seen below:
 
-![Error Screenshot 1](./Errors-solution/error-1.png)
+![Error Screenshot 2](./Errors-solution/error-1.png)
 So I looked for the file that was generating the modified dataset and added the argument (`dtype`=`float`) and ensured that all datasets were properly converted to supported data types (`float`) before creating `torch.Tensor`.
-![Solution Screenshot 1](./Errors-solution/solution-1.png)
+![Solution Screenshot 2](./Errors-solution/solution-1.png)
 
 - Additionally, there was a **KeyError** indicating missing categorical columns in the dataset. I faced these errors because there was no proper mechanism for using the census dataset, so I made the possible adjustments  and verified and correctly defined the categorical and continuous columns used in the data preprocessing step. The corresponding traceback is shown below:
 
-![Error Screenshot 2](./Errors-solution/error-2.png)
+![Error Screenshot 3](./Errors-solution/error-2.png)
 - The **KeyError** was addressed by verifying and correctly defining the categorical and continuous columns used in the data preprocessing step.
 - After resolving these errors, the code was successfully executed, producing attack accuracy for a **single poisoning rate**.
 
