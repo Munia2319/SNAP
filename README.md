@@ -32,11 +32,13 @@ This section describes the modifications I made to the code to enhance its funct
 
 ![Error Screenshot 2](./Errors-solution/error-1.png)
 So I looked for the file that was generating the modified dataset and added the argument (`dtype`=`float`) and ensured that all datasets were properly converted to supported data types (`float`) before creating `torch.Tensor`.
+
 ![Solution Screenshot 2](./Errors-solution/solution-1.png)
 
 - Additionally, there was a **KeyError** indicating missing categorical columns in the dataset. I faced these errors because there was no proper mechanism for using the census dataset, so I made the possible adjustments  and verified and correctly defined the categorical and continuous columns used in the data preprocessing step. The corresponding traceback is shown below:
 
 ![Error Screenshot 3](./Errors-solution/error-2.png)
+
 - The **KeyError** was addressed by verifying and correctly defining the categorical and continuous columns used in the data preprocessing step.
 - After resolving these errors, the code was successfully executed, producing attack accuracy for a **single poisoning rate**.
 
