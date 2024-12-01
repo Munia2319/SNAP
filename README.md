@@ -1,11 +1,12 @@
-<<<<<<< HEAD
+
 # SNAP: Efficient Extraction of Private Properties with Poisoning
 **Authors: Harsh Chaudhari, John Abascal, Alina Oprea, Matthew Jagielski, Florian Tramèr, Jonathan Ullman.**
 
-Code for our [SNAP: Efficient Extraction of Private Properties with Poisoning](https://arxiv.org/pdf/2208.12348.pdf) paper that will appear at IEEE S&P 2023.  
+Code is implemented in this paper [SNAP: Efficient Extraction of Private Properties with Poisoning](https://arxiv.org/pdf/2208.12348.pdf) paper that will appear at IEEE S&P 2023.
+This code is collected from the author's [SNAP repository](https://github.com/johnmath/snap-sp23/tree/main)
 
 ## Running the Model Confidence attack
- This version of our attack obtains the model confidences from the target models for the distinguishing test. The **Label-Only** version of our attack where the target model returns only the predicted label can be found in the 'label-only' branch of our repository.
+This version of our attack obtains the model confidence from the target models for the distinguishing test. 
 The following script modifies the training dataset, trains target and shadow models, runs the attack, and prints the results.
 ```shell
 python run_attacks.py -dat [--dataset] -tp [--targetproperties] -t0 [--t0frac] -t1 [--t1frac] \
@@ -13,60 +14,43 @@ python run_attacks.py -dat [--dataset] -tp [--targetproperties] -t0 [--t0frac] -
                       -subcat [--subcategories] -q [--nqueries] -nt [--ntrials]
 
 ```
+# Enhancements in the Code for Poisoning Attack Accuracy
 
-Each of the arguments can be set to one of the following:
+### Overview
+This section describes the modifications I made to the code to enhance its functionality. Initially, the provided codebase was set up to evaluate attack accuracy for a single poisoning rate. I extended its functionality to dynamically handle multiple poisoning rates for different property sizes, allowing for better evaluation and visualization. Below is a detailed breakdown of the steps and enhancements made:
 
-```shell
-dataset (string): "adult" -- Adult dataset
-                  "census" -- Census-Income (KDD) dataset. (Link provided at the end to download the dataset).
+---
 
-targetproperties (string): An array representation of the list of target properties. 
-                           e.g. '[(race, White), (sex, Male)]'
-                    
-t0frac (float): value between [0, 1] for t0 fraction of target property.
+### Step 1: Setting Up the Environment
+- I created a virtual environment and installed all the required packages listed in the repository.
+- During the initial run, I encountered a **TypeError** related to converting `numpy.ndarray` to `torch.Tensor`. The error traceback can be seen below:
 
-t1frac (float): value between [0, 1] for t1 fraction of target property. (t0 < t1)
+![Error Screenshot 1](./error.png)
 
-shadowmodels (int): Number of shadow models per fraction. Default: 4.
-                     
-poisonlist (string): An array representation of the list of poisoning rates as decimals (between 0 and 1).
-                     e.g. '[0.03, 0.05]'
+- Additionally, there was a **KeyError** indicating missing categorical columns in the dataset. The corresponding traceback is shown below:
 
-device (string): PyTorch device
-                 e.g. "mps" (for Apple Silicon), "cpu", "cuda"
+![Error Screenshot 2](./error-2.png)
 
-flagsub (bool): If True, runs the optimized version of SNAP that poisons a subproperty of the target property.
-                Make sure the original target property is large-sized (t0 > 0.1) for the optimized version.
+---
 
-subcategories (string): An array representation of the list of subproperties for the optimized version of SNAP.
-                        e.g. '[(marital-status, Never-married)]'
+### Step 2: Resolving Initial Errors
+- The **TypeError** was resolved by ensuring all datasets were properly converted to supported data types (`float`, `int`) before creating `torch.Tensor`.
+- The **KeyError** was addressed by verifying and correctly defining the categorical and continuous columns used in the data preprocessing step.
 
-nquereis (int): Number of black-box queries made to a target model. Default: 1000.
+After resolving these errors, the code was successfully executed, producing attack accuracy for a **single poisoning rate**.
 
-ntrials (int): The number of experimental trials to run. Default: 1.
-```
+---
 
-An example to run **SNAP** attack on a **medium-sized** property :
+### Step 3: Adding Support for Multiple Poisoning Rates
+- I extended the code to handle **multiple poisoning rates** dynamically for different property sizes (e.g., small, medium, large).
+- This was achieved by modifying the argument parser to accept a list of poisoning rates:
 
-```shell
-python run_attack.py -tp="[(sex, Female),(occupation, Sales)]" -p="[0.006]" -t0=0.01 -t1=0.035
-```
-An example to run the optimized version of **SNAP** attack on **large-sized** property:
+```python
+parser.add_argument(
+    '-p',
+    '--poisonlist',
+    help='list of poison percent',
+    type=str,
+    default="[0.0, 0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.05]"
+)
 
-```shell
-python run_attack.py -fsub=True -tp="[(race, White),(sex, Male)]" -subcat="[(marital-status, Never-married)]" -p="[0.03]" -t0=0.15 -t1=0.30
-```
-
-An example to run **Property Existence** attack on **small-sized** property:
-
-```shell
-python run_attack.py -tp="[(native-country, Germany]" -p="[0.0008]" -t0=0.0 -t1=0.001 -q 100
-```
-
-Link to Download Census: https://archive.ics.uci.edu/ml/datasets/Census-Income+(KDD). Download the dataset and place it in the 'dataset' folder.
-
-
-
-=======
-# SNAP
->>>>>>> origin/main
