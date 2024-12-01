@@ -24,7 +24,8 @@ This section describes the modifications I made to the code to enhance its funct
 
 ### Step 1: Setting Up the Environment
 - I created a virtual environment and installed all the required packages.
-- During the initial run, I also found an error regarding the command line argument. It was because in the repo they added '=' for assigning the argument value. So analysed how the argument was designed to take the value and tried it without '='.
+- During the initial run, I also found an error regarding the command line argument. It was because, in the example section of their repository, they added '=' for assigning the argument value. So I analyzed how the argument was designed to take the value in the code and tried it without '='.
+  
 ![Error Screenshot 1](./Errors-solution/error-3.png)
    
 - I encountered a **TypeError** related to converting `numpy.ndarray` to `torch.Tensor`. The error traceback can be seen below:
