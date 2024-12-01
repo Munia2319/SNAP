@@ -22,26 +22,22 @@ This section describes the modifications I made to the code to enhance its funct
 ---
 
 ### Step 1: Setting Up the Environment
-- I created a virtual environment and installed all the required packages listed in the repository.
+- I created a virtual environment and installed all the required packages.
 - During the initial run, I encountered a **TypeError** related to converting `numpy.ndarray` to `torch.Tensor`. The error traceback can be seen below:
 
-![Error Screenshot 1](./error.png)
+![Error Screenshot 1](./Errors-solution/error-1.png)
+So I looked for the file that was generating the modified dataset and added the argument (`dtype`=`float`) and ensured that all datasets were properly converted to supported data types (`float`) before creating `torch.Tensor`.
 
 - Additionally, there was a **KeyError** indicating missing categorical columns in the dataset. The corresponding traceback is shown below:
 
-![Error Screenshot 2](./error-2.png)
-
----
-
-### Step 2: Resolving Initial Errors
-- The **TypeError** was resolved by ensuring all datasets were properly converted to supported data types (`float`, `int`) before creating `torch.Tensor`.
+![Error Screenshot 2](./Errors-solution/error-2.png)
 - The **KeyError** was addressed by verifying and correctly defining the categorical and continuous columns used in the data preprocessing step.
-
-After resolving these errors, the code was successfully executed, producing attack accuracy for a **single poisoning rate**.
+- I faced these errors because there was no proper mechanism for using the census dataset, so I made the possible adjustments  and verified and correctly defined the categorical and continuous columns used in the data preprocessing step.
+- After resolving these errors, the code was successfully executed, producing attack accuracy for a **single poisoning rate**.
 
 ---
 
-### Step 3: Adding Support for Multiple Poisoning Rates
+### Step 2: Adding Support for Multiple Poisoning Rates
 - I extended the code to handle **multiple poisoning rates** dynamically for different property sizes (e.g., small, medium, large).
 - This was achieved by modifying the argument parser to accept a list of poisoning rates:
 
