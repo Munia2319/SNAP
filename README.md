@@ -17,7 +17,7 @@ python run_attacks.py -dat [--dataset] -tp [--targetproperties] -t0 [--t0frac] -
 # Enhancements in the Code for Poisoning Attack Accuracy
 
 ### Overview
-This section describes the modifications I made to the code to enhance its functionality. Initially, the provided codebase was set up to evaluate attack accuracy for a single poisoning rate. I extended its functionality to dynamically handle multiple poisoning rates for different property sizes, allowing for better evaluation and visualization. Below is a detailed breakdown of the steps and enhancements made:
+This section describes the modifications I made to the code to enhance its functionality. Initially, the provided codebase was set up to evaluate attack accuracy for a single poisoning rate. I extended its functionality to dynamically handle multiple poisoning rates for different property sizes, allowing for better evaluation and visualization. I also added the requirement.txt. Below is a detailed breakdown of the steps and enhancements made:
 
 ---
 
@@ -37,10 +37,10 @@ So I looked for the file that was generating the modified dataset and added the 
 
 ---
 
-### Step 2: Adding Support for Multiple Poisoning Rates
-- I extended the code to handle **multiple poisoning rates** dynamically for different property sizes (e.g., small, medium, large).
-- This was achieved by modifying the argument parser to accept a list of poisoning rates:
-
+### Step 2: Adding Support for Multiple Poisoning Rates and ploting
+- I extended the code to handle **multiple poisoning rates** dynamically for different property sizes (e.g., small, medium, large). This was achieved by modifying the argument parser to accept a list of poisoning rates.
+- I also modified the code so that it can plot the accuracy for different poison rates dynamically.
+  
 ```python
 parser.add_argument(
     '-p',
@@ -50,8 +50,6 @@ parser.add_argument(
     default="[0.0, 0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.05]"
 ) ```
 
-
-- I also modified the code so that it can plot the accuracy for different poison rates dynamically.
  print("Attack Accuracy:")
     poisoning_rates = []
     accuracies = []
